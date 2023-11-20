@@ -122,6 +122,7 @@ fun PantallaFormUI(){
     val contexto = LocalContext.current
     val appVM:AppVM = viewModel()
     val formRegistroVM:FormRegistroVM = viewModel()
+    val ciudadIngresada = formRegistroVM.nombre.value
 
     Column(
         modifier = Modifier.fillMaxSize().padding(16.dp),
@@ -176,6 +177,7 @@ fun PantallaFormUI(){
 fun generarNombreSegunFechaHastaSegundo():String = LocalDateTime
     .now().toString().replace(Regex("[T:.-]"),"").substring(0, 14)
 
+
 fun crearArchivoImagenPrivada(contexto: Context): File = File(
     contexto.getExternalFilesDir(Environment.DIRECTORY_PICTURES),
     "${generarNombreSegunFechaHastaSegundo()}.jpg"
@@ -188,6 +190,7 @@ fun capturarFotografia(
     contexto: Context,
     onImagenGurdada: (uri: Uri) -> Unit
 ){
+
     val opciones = ImageCapture.OutputFileOptions.Builder(archivo).build()
     cameraController.takePicture(
         opciones,
